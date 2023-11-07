@@ -1,0 +1,44 @@
+from tkinter import *
+import random
+
+window = Tk()
+def generate_key(number):
+    digits = [int(d) for d in str(number)]
+
+    first_block_digits = random.sample(digits[3:], 3)
+    b31 = int(str(first_block_digits[0]) + str(first_block_digits[1]) + str(first_block_digits[2]))
+
+    second_block_digits = random.sample(digits[:3], 3)
+    b32 = int(str(second_block_digits[0]) + str(second_block_digits[1]) + str(second_block_digits[2]))
+
+    first_block_letters = random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 3)
+
+    second_block_letters = random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 3)
+
+    third_block = b31 + b32
+
+    key = f"{ ''.join(map(str, first_block_digits + first_block_letters)) }-{ ''.join(map(str, second_block_digits + second_block_letters)) } { third_block }"
+    return key
+def clicked():
+    number = txt.get()
+    key1 = generate_key(number)
+    lbl_key = Label(window, text='Ваш ключ: ' + key1, font=("Arial Bold", 20))
+    lbl_key.grid(column=1, row=3, padx=30, pady=0)
+
+
+window.geometry('800x600')
+image_ = PhotoImage(file="wall.png")
+bg_label = Label(window, image=image_)
+bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+lbl = Label(window, text='Введите 6-значное число:', font=("Times New Roman", 20))
+lbl.grid(column=1, row=0, padx=30, pady=30)
+txt = Entry(window, width=3, font=("Times New Roman", 20))
+txt.focus()
+txt.grid(column=2, row=0, padx=0, pady=30)
+btn = Button(window, text="ПИП!", font=("Times New Roman", 20), command=clicked)
+btn.grid(column=3, row=0, padx=30, pady=30)
+txt = Entry(window, width=3, font=("Times New Roman", 20))
+txt.focus()
+txt.grid(column=2, row=0, padx=0, pady=30)
+window.mainloop()
