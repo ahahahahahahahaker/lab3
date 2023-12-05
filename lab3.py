@@ -4,6 +4,8 @@ import random
 window = Tk()
 window.geometry('1400x1000')
 alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
 def generate_key(number):
 
     digits = [int(d) for d in str(number)]
@@ -22,11 +24,14 @@ def generate_key(number):
 
     return f"{ ''.join(map(str, block_digits1 + block_letters1)) }-\
 { ''.join(map(str, block_digits2 + block_letters2)) } { block3 }"
+
+
 def clicked():
     number = txt.get()
     key = generate_key(number)
     lbl_key = Label(window, text='Ваш ключ: ' + key, font=("Arial Bold", 20))
     lbl_key.grid(column=1, row=3, padx=30, pady=0)
+
 
 image_ = PhotoImage(file='wall.png')
 bg_label = Label(window, image=image_)
